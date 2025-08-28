@@ -51,7 +51,7 @@ Als deze code als standalone project zou worden gerund, dan kan je ervoor kiezen
 
 ## Gekozen tools
 
-De Vercel AI SDK is een populaire SDK voor het orkestreren van AI workflows. De SDK bestaat uit simpele componenten waarmee je API calls kunt maken naar AI modellen. Ik heb gekozen voor twee verschillende AI modellen van OpenAI: GPT-5 Mini en GPT-5 Nano. GPT-5 Mini wordt gebruikt om de beschrijving te genereren, waarna GPT-5 Nano wordt gebruikt om de resterende details te genereren. De reden voor het gebruik van verschillende modellen is dat elk model specifieke sterke punten heeft voor verschillende soorten taken.
+De Vercel AI SDK is een populaire SDK voor het orkestreren van AI workflows. De SDK bestaat uit simpele componenten waarmee je API calls kunt maken naar AI modellen. Ik heb gekozen voor twee verschillende AI modellen van OpenAI. GPT-5 Mini wordt gebruikt om de beschrijving te genereren, waarna GPT-4o Mini wordt gebruikt om de resterende details te genereren. De reden voor het gebruik van verschillende modellen is dat elk model specifieke sterke punten heeft voor verschillende soorten taken.
 
 De functies van de SDK hebben support voor [Zod](https://zod.dev) validation schemas. Hiermee kan je verzekeren dat een AI model een bepaalde format aanhoudt voor de output.
 
@@ -80,3 +80,5 @@ Om de code te runnen:
 ```bash
 bun run index.ts
 ```
+
+Houd er rekening mee dat een API call naar een OpenAI model een paar secondes kan duren. Zeker in het geval van GPT-5 die redeneert en dus iets langer nadenkt.

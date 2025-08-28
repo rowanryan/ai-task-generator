@@ -26,7 +26,7 @@ async function main() {
     terminal.write(`Beschrijving:\n${description}\n\n`);
 
     const { object: task } = await generateObject({
-        model: openai("gpt-5-nano"),
+        model: openai("gpt-4o-mini"),
         system: `
             Je bent gespecialiseerd in het maken van taken voor een full-service online marketing bureau
             die bedrijven helpt hun klanten te bereiken en hun bedrijfsdoelen te behalen door middel van
