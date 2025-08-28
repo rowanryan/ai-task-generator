@@ -10,46 +10,60 @@ const terminal = readline.createInterface({
 });
 
 async function main() {
-    const shortTitle = await terminal.question("Enter a short title: ");
+    const shortTitle = await terminal.question("Korte titel van taak: ");
 
     const { text: description } = await generateText({
-        model: openai("gpt-4o-mini"),
+        model: openai("gpt-5-mini"),
         system: `
-            You are a task creator for a full service online marketing agency that helps
-            clients reach their target audience and achieve their
-            business goals through strategy, branding, advertisements
-            and custom development.
-            You are given a short title of a task and you need to generate a description for the task.
-            The description should have at least 100 words and cannot have more than 500 words. It should be descriptive enough
-            to give the reader a good idea of what the requirements of the task are. Make sure you return the description in markdown format.
+            Je bent gespecialiseerd in het maken van taken voor een full-service online marketing bureau
+            die bedrijven helpt hun klanten te bereiken en hun bedrijfsdoelen te behalen door middel van
+            strategie, branding, advertenties en custom software development. Je krijgt als input een korte titel van een taak en je moet een beschrijving voor de taak genereren. De beschrijving mag niet meer dan 200 woorden bevatten. Deze beschrijving moet duidelijk zijn en geen namen bevatten. Gebruik geen markdown, speciale tekens of andere formatting. Gebruik alleen simpele zinnen en beschrijf niet zo uitgebreid.
         `,
-        prompt: `Generate a description for the following title: ${shortTitle}`,
+        prompt: `Genereer een taakbeschrijving op basis van de volgende titel: ${shortTitle}`,
     });
 
+    terminal.write(`Titel:\n${shortTitle}\n\n`);
+    terminal.write(`Beschrijving:\n${description}\n\n`);
+
     const { object: task } = await generateObject({
-        model: openai("gpt-4o-mini"),
+        model: openai("gpt-5-nano"),
         system: `
-            You are a task creator for a full service online marketing agency that helps
-            clients reach their target audience and achieve their
-            business goals through strategy, branding, advertisements
-            and custom development. You are given a title and description (written in markdown format) of a task and you need to generate a task object.
-            The task object should be in the following format:
+            Je bent gespecialiseerd in het maken van taken voor een full-service online marketing bureau
+            die bedrijven helpt hun klanten te bereiken en hun bedrijfsdoelen te behalen door middel van
+            strategie, branding, advertenties en custom software development.
+            Je krijgt als input een titel en beschrijving van een taak en je moet een taakobject genereren.
+            Het taakobject moet de volgende vorm hebben:
             {
                 department: "marketing" | "development" | "sales" | "finance",
                 priority: "low" | "medium" | "high",
                 subtasks?: string[],
                 storyPoints?: "1" | "2" | "3" | "5" | "8",
             }
-            Subtasks are optional and can be an empty array.
-            Story points are optional and can be "1", "2", "3", "5", or "8".
+            Subtasks zijn optioneel en kunnen een lege array zijn. Elke subtitel is een korte titel.
+            Story points zijn optioneel en kunnen "1", "2", "3", "5" of "8" zijn.
         `,
         prompt: `
-            Generate a task object for the following data:
-            Title: ${shortTitle}
-            Description: ${description}
+            Genereer een taakobject voor de volgende data:
+            Titel: ${shortTitle}
+            Beschrijving: ${description}
         `,
-        schema: AiTaskSchema,
+        schema: AiTaskSchema.omit({
+            title: true,
+            description: true,
+            status: true,
+        }),
     });
+
+    terminal.write(`Afdeling:\n${task.department}\n\n`);
+    terminal.write(`Prioriteit:\n${task.priority}\n\n`);
+    terminal.write(`Story Points:\n${task.storyPoints}\n\n`);
+    terminal.write(
+        `Onderdelen:\n${
+            task.subtasks && task.subtasks.length > 0
+                ? task.subtasks.map(subtask => `- ${subtask}`).join("\n")
+                : "None"
+        }\n`
+    );
 
     process.exit(0);
 }
