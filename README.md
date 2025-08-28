@@ -61,6 +61,8 @@ Deze AI Task Generator is op dit moment redelijk simpel. In een bedrijf zijn er 
 
 Voor het bepalen van blokkerende taken (dependencies) zal je ook wat meer functionaliteit nodig hebben. Denk aan het gebruik van vector databases om relevante taken te groeperen, zodat je kan bepalen welke taken eventueel elkaar kunnen blokkeren.
 
+Ook kan je de generatie van de beschrijving en resterende details nauwkeuriger maken door de system prompt aan te passen en het AI model instructies te geven over het maximaal aantal subtaken dat gegenereerd kan worden, bijvoorbeeld. Dit kan toevallig ook met de Zod validation schema.
+
 ## Uitproberen
 
 Ik heb voor dit projectje gekozen voor Bun. Dit is een Node.js compatible runtime die Typescript support ingebouwd heeft. Als je de code wilt runnen en Bun nog niet geinstalleerd hebt, dan kan je dit downloaden op de website van [Bun (https://bun.sh)](https://bun.sh).
