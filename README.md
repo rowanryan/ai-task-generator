@@ -24,7 +24,7 @@ Als eerst is het belangrijk om te bepalen wat een taak is. Dit klinkt natuurlijk
 -   Story points (1, 2, 3, 5, 8, 13)
 -   Subtasks (Een checklist van kleinere taken)
 
-Afhankelijk van de software die gebruikt wordt en configuraties kunnen er meer attributen zijn die gebruikt worden.
+Afhankelijk van de project management software die gebruikt wordt en configuraties kunnen er meer attributen zijn die gebruikt worden.
 
 ### Het belang van een goede beschrijving
 
